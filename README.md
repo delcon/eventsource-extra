@@ -107,9 +107,10 @@ The `options` used in the constructor `new EventSourceExtra(url, options )`or us
 ```js
 const options = {
   method: 'POST', // optional, GET POST PATCH DELETE, default is GET
-  headers: {'Authorization': 'Bearer secret-key'}}, // optional
+  headers: {'Authorization': 'Bearer secret-key'}, // optional
   payload: '{ "foo" : "bar" }', // optional, String, FromData, Buffer ...
-  withCredentials: true // default is false
+  withCredentials: true, // optional, default is false
+  debug: true // optional, default is false
 }
 ```
 
@@ -121,6 +122,7 @@ const options = {
 | `method`          | Override HTTP method (defaults to `GET`, unless a payload is given, in which case it defaults to `POST`) |
 | `payload`         | An optional request payload to sent with the request |
 | `withCredentials` | If set to `true`, CORS requests will be set to include credentials |
+| `debug`           | If set to `true`, all events will be logged to console |
 
 ## Examples
 - cd to `examples`, `npm install` then `node server` to run express
