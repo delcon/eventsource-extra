@@ -129,4 +129,4 @@ const options = {
 
 ## Credits
 
-Credits to https://github.com/mpetazzoni/sse.js, this work is an extension and partially rewrite of his library.
+Credit to https://github.com/mpetazzoni/sse.js, this work is inspired by his library.
