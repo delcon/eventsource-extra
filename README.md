@@ -125,7 +125,7 @@ const options = {
 | `debug`           | If set to `true`, all events will be logged to console |
 
 ## Examples
-- cd to `examples`, `npm install` then `node server` to run express
+- cd to `examples/express`, `npm install` then `node index.js` to run express
 
 ## Credits
 

@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<style>
+			.container {
+				display: flex;
+				flex-direction: column;
+				gap: 35px;
+			}
+			.row {
+				display: flex;
+				align-items: center;
+				border-bottom: 1px solid grey;
+			}
+			section {
+				display: inline-flex;
+				width: 450px;
+				min-height: 75px;
+				border: 1px solid grey;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			pre {
+				margin: 5px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.events {
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+			.events .type {
+				margin: 0 10px;
+				width: 95px;
+				font-size: 14px;
+			}
+			.events .data {
+				margin: 5px;
+			}
+			.row.header {
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<section class="sseAsync">
+				<button>POST /sseAsync</button>
+				<div class="events">
+					<div class="row header">
+						<div class="type">Event Type</div>
+						<div class="data">Data:</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<script type="text/javascript" src="EventSourceExtra.js"></script>
+
+		<script type="text/javascript">
+			/**
+			 * EventSource replacement: EventSource = EventSourceExtra
+			 */
+
+			function stringify(data) {
+				try {
+					data = JSON.stringify(data)
+				} catch {}
+				return data
+			}
+
+			function addEvent(where, type, data) {
+				let div = document.createElement("div")
+				div.className = "row"
+				div.innerHTML = `<div class="type">${type}</div><pre class="data">${stringify(data)}</pre>`
+				document.querySelector(where).appendChild(div)
+			}
+
+			let sseAsync
+			const sseAsyncButton = document.querySelector(".sseAsync button")
+			sseAsyncButton.addEventListener("click", () => {
+				sseAsync = new EventSourceExtra("/sseAsync", {
+					payload: "Hello World",
+					headers: { "Content-Type": "text/plain" },
+				})
+
+				sseAsync.on("message", (data) => {
+					console.log("message:", data)
+					addEvent(".sseAsync .events", "message", data)
+				})
+				sseAsync.on("myEvent", (data) => {
+					console.log("myEvent", data)
+					addEvent(".sseAsync .events", "myEvent", data)
+				})
+				sseAsync.on("connect", (data) => {
+					console.log("connect", data)
+					addEvent(".sseAsync .events", "connect", data)
+				})
+				sseAsync.on("disconnect", (data) => {
+					console.log("disconnect", data)
+					addEvent(".sseAsync .events", "disconnect", data)
+				})
+				sseAsync.on("error", (data) => {
+					console.log("error:", data)
+					addEvent(".sseAsync .events", "error", data)
+				})
+				sseAsync.stream()
+			})
+		</script>
+	</body>
+</html>

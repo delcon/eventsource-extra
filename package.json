@@ -1,0 +1,33 @@
+{
+  "name": "eventsource-extra",
+  "version": "1.0.0",
+  "description": "EventSource replacement to POST PATCH DELETE",
+  "main": "EventSourceExtra.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delcon/eventsource-extra.git"
+  },
+  "keywords": [
+    "eventsource",
+    "post",
+    "payload",
+    "postrequest",
+    "server-side-events",
+    "sse-client",
+    "postrequests",
+    "javascrpt",
+    "examples",
+    "sse",
+    "headers",
+    "authentication"
+  ],
+  "author": "Leo Vetterli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/delcon/eventsource-extra/issues"
+  },
+  "homepage": "https://github.com/delcon/eventsource-extra#readme"
+}
